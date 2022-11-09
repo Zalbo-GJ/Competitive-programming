@@ -1,15 +1,16 @@
-class Solution(object):
-    def maxScore(self, cardPoints, k):
-        """
-        :type cardPoints: List[int]
-        :type k: int
-        :rtype: int
-        """
-        best =tot= sum(cardPoints[:k])
-        l,r = k-1,len(cardPoints)-1
+class Solution:
+    def maxScore(self, cardPoints, k):       
+        max_sum = 0     
         for i in range(k):
-            tot+=(cardPoints[r]-cardPoints[l])
+            max_sum += cardPoints[i]
+        ans = max_sum
+        l= k-1
+        r = len(cardPoints)-1
+        while r >= len(cardPoints) - k:
+            max_sum += cardPoints[r] - cardPoints[l]
+            ans = max(max_sum,ans)
             r-=1
             l-=1
-            best = max(best,tot)
-        return best
+            
+        return ans
+        
