@@ -1,15 +1,16 @@
-class Solution(object):
-    def sortPeople(self, names, heights):
-        """
-        :type names: List[str]
-        :type heights: List[int]
-        :rtype: List[str]
-        """
+class Solution:
+    def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
         
-        d = []
-        for i in range(len(names)):
-            d.append((heights[i],names[i]))
+        
+        
+        for _ in range(len(heights)):
             
-        d.sort(key = lambda x : x,reverse = True)
-        
-        return [i[1] for i in d]
+            for i in range(len(heights)-1):
+                
+                if heights[i] < heights[i+1]:
+                    heights[i], heights[i+1] = heights[i+1], heights[i]
+                    names[i], names[i+1] = names[i+1], names[i]
+                    
+            
+        return names
+                    
