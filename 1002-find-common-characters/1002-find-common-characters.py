@@ -1,31 +1,25 @@
 class Solution:
     def commonChars(self, words: List[str]) -> List[str]:
         
-        
         """
-            step1: save count for each word in a dictionary 
-            step2: for the  letter count of the first word take the min count in each word
-            Step3: append the letter count times
-            
+        1. count the first element and set as bestcase answr
+        2. check each count of element from 1 to n if element of ans exist and take the min count
         """
-        counts = []
         
-        for word in words:
-            counts.append(Counter(word))
+        best = Counter(words[0])
+      
         ans = []
-        for letter in counts[0]:
-            minn = float("inf")
+        for i in range(1, len(words)):
+            ele = Counter(words[i])
             
-            for count in counts:
-                
-                minn = min(minn, count.get(letter, 0))
-                
-            for _ in range(minn):
-                ans.append(letter)
-        
+            for char in best:
+                if ele[char] > 0:
+                    best[char] = min(best[char], ele[char])
+                else:
+                    best[char] = 0
+                    
+        for i in best:
+            for _ in range(best[i]):
+                ans.append(i)
+            
         return ans
-            
-                
-            
-        
-        
