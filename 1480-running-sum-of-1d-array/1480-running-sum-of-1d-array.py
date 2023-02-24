@@ -1,15 +1,10 @@
-class Solution(object):
-    def runningSum(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        ans = []
-        presum = 0
+class Solution:
+    def runningSum(self, nums: List[int]) -> List[int]:
         
-        for i in nums:
-            presum += i
-            ans.append(presum)
+        summ = 0
         
-        return ans
-        
+        for i in range(len(nums)):
+            summ += nums[i]
+            nums[i] = summ
+        return nums
+            
