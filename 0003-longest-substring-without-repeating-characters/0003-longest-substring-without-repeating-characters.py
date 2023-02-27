@@ -1,19 +1,24 @@
-class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        d = {}
-        ans = 0
-        l = 0
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
         
-        for r, char in enumerate(s):
-            if char in d and l <= d[char]:
-                l = d[char]+1
+        """
+        1. we expand and add the chars in dict
+        2. if char exist in dict then compress untill 
+        """
+        
+        dic = {}
+        l = 0
+        maxx = 0
+        
+        for r in range(len(s)):
+        
+            while s[r] in dic:
                 
-            else:
-                ans = max(ans, r-l+1)
-            d[char] = r
+                del(dic[s[l]])
+                l += 1
+    
+            dic[s[r]] = 1
             
-        return ans
+            maxx = max(maxx, r-l+1)
+        
+        return maxx
