@@ -4,11 +4,18 @@ class Solution:
         Do not return anything, modify s in-place instead.
         """
         
-        l = 0
-        r = len(s)-1
+        self.swaper(0,len(s)-1,s)
         
-        while l<r:
+            
+            
+    def swaper(self,l,r,s):
+        
+        
+        if  l < r:
+            
             s[l], s[r] = s[r], s[l]
-            r-=1 
-            l += 1
+            
+            self.swaper(l+1,r-1,s)
+        
+            
         
