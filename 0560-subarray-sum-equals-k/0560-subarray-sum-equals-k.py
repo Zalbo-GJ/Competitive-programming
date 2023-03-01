@@ -1,20 +1,19 @@
-class Solution(object):
-    def subarraySum(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
-        psum = 0
-        d = {0:1}
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        
+        presum = 0
+        dic = {0:1}
         ans = 0
         for i in nums:
-            psum += i
+            presum += i
             
-            if psum-k in d:
-                ans += d[psum-k]
-            if psum not in d:
-                d[psum] = 1
+            if presum - k in dic:
+                ans += dic[presum-k]
+                
+            
+            if presum in dic:
+                dic[presum] += 1
             else:
-                d[psum] += 1
+                dic[presum] = 1
+                    
         return ans
