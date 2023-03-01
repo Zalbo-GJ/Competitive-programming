@@ -1,20 +1,17 @@
-class Solution(object):
-    def subarraysDivByK(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: int
-        """
-        d = {0:1}
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        
         presum = ans = 0
+        dic = {0:1}
         for i in range(len(nums)):
             presum += nums[i]
-            rem = presum%k
-            if rem in d:
-                ans+=d[rem]
-                d[rem]+=1
-                
-            else:
-                d[rem] = 1
-        return ans
             
+            if presum % k in dic:
+                ans += dic[presum % k]
+            
+            if presum % k in dic:
+                dic[presum % k] += 1
+            else:
+                dic[presum % k] = 1
+        
+        return ans
