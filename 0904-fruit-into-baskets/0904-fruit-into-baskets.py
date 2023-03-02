@@ -1,25 +1,30 @@
-class Solution(object):
-    def totalFruit(self, fruits):
+class Solution:
+    def totalFruit(self, fruits: List[int]) -> int:
         """
-        :type fruits: List[int]
-        :rtype: int
+        1.we count the types fo fruits in the window, if types > 2 we shrink else we expand
+        2.we count the max(no_fruits) in window when types <= 2
         """
         
-        types = Counter()
-        ans = variety = l = r = 0
+        l = 0
+        inBasket = 0
+        dic = {}
         
-        while r < len(fruits):
+        for r in range(len(fruits)):
             
-            if types[fruits[r]] == 0:
-                variety+=1
-            types[fruits[r]] += 1
+            if fruits[r] in dic:
+                dic[fruits[r]] += 1
+            else :
+                dic[fruits[r]] = 1
             
-            while variety > 2:
-                types[fruits[l]] -= 1
-                if types[fruits[l]] == 0:
-                    variety -= 1
-                l+=1
-            ans = max(ans, r-l+1)
-            r+=1
-        return ans
+            while len(dic) > 2:
+                dic[fruits[l]] -= 1   
+                if dic[fruits[l]] == 0:
+                    del(dic[fruits[l]])
+                l += 1
+            
+            inBasket = max(inBasket, r-l+1)
+        
+        return inBasket
+            
+            
             
