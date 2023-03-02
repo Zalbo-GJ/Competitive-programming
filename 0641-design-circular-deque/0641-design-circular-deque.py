@@ -1,99 +1,68 @@
-class MyCircularDeque(object):
+class MyCircularDeque:
 
-    def __init__(self, k):
-        """
-        :type k: int
-        """
-        self.que = []
+    def __init__(self, k: int):
+        self.que = Deque()
         self.k = k
-
-    def insertFront(self, value):
-        """
-        :type value: int
-        :rtype: bool
-        """
-        if len(self.que)!=self.k:
-            self.que.insert(0,value)
-            return True
-        else:
-            return False
+        self.size = 0
+        
         
 
-    def insertLast(self, value):
-        """
-        :type value: int
-        :rtype: bool
-        """
-        if len(self.que)!=self.k:
+    def insertFront(self, value: int) -> bool:
+        if self.size < self.k:
+            self.que.appendleft(value)
+            self.size += 1
+            return True
+        return  False
+        
+        
+
+    def insertLast(self, value: int) -> bool:
+        if self.size < self.k:
             self.que.append(value)
+            self.size += 1
             return True
-        else:
-            return False
+        return  False
+
+
+    def deleteFront(self) -> bool:
+        if self.size > 0:
+            self.que.popleft()
+            self.size -= 1
+            return True
+        return False
         
 
-    def deleteFront(self):
-        """
-        :rtype: bool
-        """
-        if len(self.que) != 0:
-            self.que.pop(0)
-            return True
-        else: 
-            return False
-
-    def deleteLast(self):
-        """
-        :rtype: bool
-        """
-        if len(self.que) != 0:
+    def deleteLast(self) -> bool:
+        if self.size > 0:
             self.que.pop()
+            self.size -= 1
             return True
-        else: 
-            return False
-
+        return False
         
 
-    def getFront(self):
-        """
-        :rtype: int
-        """
-        if len(self.que) != 0:
-            
+    def getFront(self) -> int:
+        if self.size > 0:
             return self.que[0]
-        else: 
-            return -1
-
+        return -1
         
 
-    def getRear(self):
-        """
-        :rtype: int
-        """
-        if len(self.que) != 0:
-            
+    def getRear(self) -> int:
+        if self.size > 0:
             return self.que[-1]
-        else: 
-            return -1
+        return -1
         
 
-    def isEmpty(self):
-        """
-        :rtype: bool
-        """
-        if len(self.que)==0:
+    def isEmpty(self) -> bool:
+        if self.size == 0:
             return True
-        else:
-            return False
+        return False
         
 
-    def isFull(self):
-        """
-        :rtype: bool
-        """
-        if len(self.que)==self.k:
+    def isFull(self) -> bool:
+        if self.size == self.k:
             return True
-        else:
-            return False
+        return False
+        
 
 
 # Your MyCircularDeque object will be instantiated and called as such:
