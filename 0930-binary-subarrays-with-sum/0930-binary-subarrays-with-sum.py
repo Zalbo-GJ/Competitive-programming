@@ -1,20 +1,23 @@
-class Solution(object):
-    def numSubarraysWithSum(self, nums, goal):
-        """
-        :type nums: List[int]
-        :type goal: int
-        :rtype: int
-        """
+class Solution:
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        
+        dic = {0:1}
         presum = 0
-        count = defaultdict(int)
-        count[0]=1
         ans = 0
-        for i in nums:
-            presum += i
-            if presum-goal in count:
-                ans+=count[presum-goal]
+        for num in nums:
             
-            count[presum] += 1
-                
+            presum += num
+            
+            if presum - goal in dic:
+                ans += dic[presum - goal]
+            
+            if presum in dic:
+                dic[presum] += 1
+            else:
+                dic[presum] = 1
+        
         return ans
-       
+            
+            
+        
+        
