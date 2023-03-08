@@ -1,23 +1,26 @@
-class Solution(object):
-    def removeDuplicateLetters(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        count = Counter(s)
-        stack = []
-        for ch in s:
-            if ch in stack:
-                count[ch] -= 1
-                continue
-                
-            while stack and stack[-1]> ch and count[stack[-1]]>0:
-                stack.pop()
-            count[ch] -= 1
-
-            stack.append(ch)
-            
-        return "".join(stack)
-                
+class Solution:
+    def removeDuplicateLetters(self, s: str) -> str:
         
+        stack = []
+        count = Counter(s)
+        
+        for ind in range(len(s)):
+            
+            count[s[ind]] -= 1
+            if s[ind] in stack:
+                continue
+            
+            while stack and  s[ind] <= stack[-1]:
+
+                if count[stack[-1]] >= 1:
+                  
+                    stack.pop()
+                else:
+                    break
+           
+                                    
+            stack.append(s[ind])
+        
+        
+        return "".join(stack)
         
