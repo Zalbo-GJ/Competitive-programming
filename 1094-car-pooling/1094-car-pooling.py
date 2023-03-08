@@ -1,24 +1,23 @@
-class Solution(object):
-    def carPooling(self, trips, capacity):
-        """
-        :type trips: List[List[int]]
-        :type capacity: int
-        :rtype: bool
-        """
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
         
-        last_d = 0
-        for i in trips:
-            last_d = max(last_d,i[2])
+        trips.sort(key = lambda x: x[1])
+        last_drop = max(i[2] for i in trips)
+
+        arr = [0 for _ in range(last_drop + 5)]
+        
+        for passengers, pickup, dropoff in trips:
             
-        ans = [0]* (last_d+1)
+            arr[pickup] += passengers
+            arr[dropoff] -= passengers
         
-        for pas, start, end in trips:
-            ans[start] += pas
-            ans[end] -= pas
-        if ans[0] > capacity:return False
-        for i in range(1,len(ans)):
-            ans[i] += ans[i-1]
-            if ans[i]> capacity:
-                return False
+        running_sum = 0
+        ans = 0
         
-        return True
+        for ind in range(last_drop+1):
+            running_sum += arr[ind]
+            
+            ans = max(ans, running_sum)
+        
+        return ans <= capacity
+        
