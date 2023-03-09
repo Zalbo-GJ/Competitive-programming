@@ -1,16 +1,12 @@
-class Solution(object):
-    def carFleet(self, target, position, speed):
-        """
-        :type target: int
-        :type position: List[int]
-        :type speed: List[int]
-        :rtype: int
-        """
+class Solution:
+    def carFleet(self, target: int, position: List[int], speed: List[int]) -> int:
+        
         stack = []
         
-        for pos, spd in sorted(zip(position,speed))[::-1]:
-            t = (target-pos)/ float(spd)    # the time it takes to get to target
-            if not stack or t > stack[-1]:
-                stack.append(t)
-        
+        for pos,spd in sorted(zip(position,speed))[::-1]:
+            distance = (target - pos) / float(spd)
+            
+            if not stack or distance > stack[-1]:
+                stack.append(distance)
+
         return len(stack)
