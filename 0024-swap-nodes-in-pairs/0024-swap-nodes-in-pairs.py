@@ -11,8 +11,11 @@ class Solution(object):
         """
         
         if head and head.next:
+            
             nxt = head.next
             head.next = self.swapPairs(nxt.next)
             nxt.next = head
+            
             return nxt
+        
         return head
