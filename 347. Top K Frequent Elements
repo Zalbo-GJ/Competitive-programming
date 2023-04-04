@@ -1,0 +1,22 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        
+        count = Counter(nums)
+        
+        bucket = [[] for _ in range(len(nums)+1)]
+        
+        for cnt in count:
+            bucket[count[cnt]].append(cnt)
+        print(bucket)
+        ans =[]
+        ind = len(bucket)-1
+        while ind > 0 and k > 0:
+            if bucket[ind]:
+                for val in bucket[ind]:
+                    if not k:
+                        break
+                    ans.append(val)
+                    k -=1
+            ind -= 1
+        
+        return ans
