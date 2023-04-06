@@ -3,27 +3,23 @@ class Solution:
         
         curr = []
         ans = set()
-        visited = set()
         
-        def backtrack():
+        
+        def backtrack(visited):
             
             if len(curr) == len(nums):
                 if tuple(curr) not in ans:
                     ans.add(tuple(curr))
-            
+        
             
             for ind in range(len(nums)):
-                
-                if ind not in visited:
-                    curr.append(nums[ind])
-                    visited.add(ind)
-                    backtrack()
-    
-                    visited.remove(ind)
-                    curr.pop()
+                if not (visited & (1 << ind)):
                     
+                    curr.append(nums[ind])
+                    backtrack( visited | (1 << ind) )
+                    curr.pop()
         
-        backtrack()
+        backtrack(0)
         
         return ans
                 
