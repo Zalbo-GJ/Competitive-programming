@@ -20,7 +20,6 @@ class Solution:
             
             level += 1
             for child in node.children:
-                depth = max(depth,level)
                 dfs(child,level)
             
             
