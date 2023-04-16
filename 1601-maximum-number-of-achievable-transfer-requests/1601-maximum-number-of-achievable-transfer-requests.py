@@ -4,10 +4,11 @@ class Solution:
         temp = [0 for _ in range(n+5)]
         granted = 0
         maxReq = 0
+        l = len(requests)
         
         def backtrack(ind):
             nonlocal temp, granted, maxReq
-            if ind == len(requests):
+            if ind == l or granted + (l-ind) <= maxReq:
                 if all(not temp[i] for i in range(n)):
                     maxReq = max(maxReq, granted)
                 return
