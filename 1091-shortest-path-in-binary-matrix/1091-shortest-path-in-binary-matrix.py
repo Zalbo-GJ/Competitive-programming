@@ -6,22 +6,28 @@ class Solution:
         if len(grid) == 1:
             return 1
         
+        def validation(r,c):
+            if (0 <= r < len(grid)) and (0 <= c < len(grid[0]))  and grid[r][c] == 0:
+                return True
+            else:
+                return False
+            
         visited = set()
         que = deque([[0,0,1]])
-        moves = [[1,1],[1,-1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,0]]
+        directions = [[1,1],[1,-1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,0]]
         
         while que:
             row, col, level = que.popleft()
             
-            for dr, dc in moves:
+            for dr, dc in directions:
                 newR, newC = row + dr, col + dc
                 
-                if (0 <= newR < len(grid)) and (0 <= newC < len(grid[0])):
-
-                    if newR == newC == len(grid)-1  and grid[newR][newC] == 0:
+                
+                if validation(newR, newC):
+                    if newR == newC == len(grid)-1 :
                         return level + 1
 
-                    if (newR, newC) not in visited and grid[newR][newC] == 0:
+                    if (newR, newC) not in visited :
                         visited.add((newR, newC))
                         que.append([newR, newC, level + 1])
         
