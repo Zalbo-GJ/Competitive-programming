@@ -10,5 +10,5 @@ class Solution:
             big = -heapq.heappop(heap)
             heapq.heappush(heap, -(big - floor(big / 2)))
             k -= 1
-        print(heap)
+            
         return -sum(heap)
