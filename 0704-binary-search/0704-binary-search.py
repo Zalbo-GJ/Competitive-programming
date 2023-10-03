@@ -11,9 +11,9 @@ class Solution:
                     return r
                 return -1
             if nums[mid] < target:
-                return recur(mid, r)
+                return recur(mid + 1, r)
             else:
-                return recur(l, mid)
+                return recur(l, mid - 1)
         
         return recur(0 , len(nums) - 1)
             
