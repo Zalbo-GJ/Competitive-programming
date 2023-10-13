@@ -8,8 +8,8 @@ class Solution:
         for i in range(len(nums)):
             while start < len(nums) and nums[start] < nums[i] + l :
                 start += 1
-             
-            ans = min(ans, l - ( start - i))
+            print(start- i)
+            ans = min(ans, l -  start + i)
 
                
         return ans
