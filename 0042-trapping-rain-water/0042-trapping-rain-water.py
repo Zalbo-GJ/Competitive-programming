@@ -1,11 +1,6 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        
-        def cal_water():
-            pass
-        
-        
-        
+
         l = 0 
         r = len(height) -1 
         l_max, r_max = 0, 0
